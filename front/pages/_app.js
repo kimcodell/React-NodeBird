@@ -5,6 +5,8 @@ import propTypes from 'prop-types';
 import Head from 'next/head';   //next에서 head를 수정하고 싶으면 이 컴포넌트를 이용.
 import 'antd/dist/antd.css';
 
+import wrapper from '../store/configureStore';
+
 const NodeBird = ({ Component }) => {
     return (
         <>
@@ -21,4 +23,5 @@ NodeBird.propTypes = {
     Component: propTypes.elementType.isRequired,
 }
 
-export default NodeBird;
+// export default NodeBird;
+export default wrapper.withRedux(NodeBird);
