@@ -5,7 +5,7 @@ export const initialState = {
             id: 1,
             nickname: '코델',
         },
-        content: "리액트 노드 버드",
+        content: "리액트 노드 버드 #첫게시글 #Next",
         Images: [{
             src: "https://cdn.pixabay.com/photo/2021/06/29/19/11/kittens-6375012_960_720.jpg",
         }, {
@@ -13,7 +13,7 @@ export const initialState = {
         }, {
             src: "https://cdn.pixabay.com/photo/2021/05/23/21/57/mountains-6277391_960_720.jpg",
         }],
-        Comment: [{
+        Comments: [{
             User: {
                 nickname: 'min',
             },
