@@ -18,8 +18,8 @@ const PostCard = ({ post }) => {
         setCommentFormOpened(prev => !prev)
     }, []);
 
-    const { me } = useSelector
-    const id = me?.id;  //옵셔널 체이닝
+    const id = useSelector(state => state.user.me?.id)
+    // const id = me?.id;  //옵셔널 체이닝
 
     return (
         <div style={{marginBottom: 20}}>
@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
                     <MessageOutlined key="comment" onClick={onToggleComment}/>,
                     <Popover key="more" content={(
                         <Button.Group>
-                            {id && post.User.id === id ? (
+                            {(id && post.User.id === id) ? (
                                 <>
                                     <Button type="primary">수정</Button>
                                     <Button type="danger">삭제</Button>

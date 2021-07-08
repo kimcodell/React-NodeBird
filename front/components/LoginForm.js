@@ -2,11 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { loginACtion } from '../reducers/user';
+import { loginRequestAction } from '../reducers/user';
 import useInput from '../hooks/useInput';
-
 
 const ButtonWrapper = styled.div`
     margin-top: 10px;
@@ -18,13 +17,14 @@ const FormWrapper = styled(Form)`
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const { isLoggingIn } = useSelector(state => state.user);
     const [id, onChangeId] = useInput('');      //커스텀 훅 사용
     const [password, onChangePassword] = useInput('');
 
     const onSubmitForm = useCallback(() => {
         //preventDefault 이미 적용되어 있음.
         console.log(id, password);
-        dispatch(loginACtion({ id, password }));
+        dispatch(loginRequestAction({ id, password }));
     }, [id, password]);
 
     return (
@@ -42,7 +42,8 @@ const LoginForm = () => {
             {/* 그냥 <div style={{marginTop: '10px'}}> 이렇게 쓰면 style을 쓴 객체가 렌더링할 때 변경된 것으로 인식되어서 여기도 리렌더링 됨.
             따라서 styled-components 사용. 만약 쓰기 싫으면 useMemo로 style값 기억 */}
             <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
+                <Button type="primary" htmlType="submit" loading={isLoggingIn}>로그인</Button>
+                {/* 로그인 버튼 누르면 dispatch에 의해 loginRequestAction이 실행되는데 그러면 saga와 reducer의 LOG_IN_REQUEST가 동시에 실행 */}
                 <Link href="/signup"><a><Button>회원가입</Button></a></Link>
             </ButtonWrapper>
         </FormWrapper>
