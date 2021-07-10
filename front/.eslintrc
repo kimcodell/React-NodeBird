@@ -1,4 +1,5 @@
 {
+    "parser": "babel-eslint",       //기본 eslint가 아닌 babel이 코드를 해석하도록 해서 최신 문법도 처리할 수 있게 해줌.
     "parserOptions": {
         "ecmaVersion": 2020,        //버전 2020
         "sourceType": "module",     //import, export 같은 모듈 시스템 사용
@@ -12,14 +13,29 @@
         "es6": true                 //es6(최신 문법) 적용
     },
     "extends": [
-        "eslint: recommended",      //기본적인 규칙을 따름. 근데 너그러워서 거의 잡는 게 없음.
-        "plugin:react/recommended"
+        // "eslint: recommended",      //기본적인 규칙을 따름. 근데 너그러워서 거의 잡는 게 없음.
+        // "plugin:react/recommended"
+        "airbnb"
     ],
     "plugins": [
         "import",
         "react-hooks"
     ],
     "rules": {
-        
+        "indent": [4, "tab"],    //들여쓰기 2칸으로 제한
+        "react/jsx-indent": [4, "tab"],
+        "max-len": "off",   //줄 최대 길이 제한
+        "spaced-comment": "off",    //주석 제한
+        "quotes": "off",    //문자열은 ''만 쓸 수 있게 하는 거
+        "no-trailing-spaces": "off",    //공백 없도록 하는 거
+        "jsx-ally/label-has-associated-control": "off",
+        "jsx-ally/anchor-is-valid": "off",
+        "no-console": "off",
+        "no-underscore-dangle": "off",
+        "react/forbid-prop-types": "off",
+        "react/jsx-filename-extension": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "object-curly-newline": "off",
+        "linebreak-style": 0
     }
 }

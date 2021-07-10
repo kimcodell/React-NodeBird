@@ -15,10 +15,10 @@ const PostCard = ({ post }) => {
         setLiked((prev) => !prev);
     }, []);
     const onToggleComment = useCallback(() => {
-        setCommentFormOpened(prev => !prev)
+        setCommentFormOpened((prev) => !prev)
     }, []);
 
-    const id = useSelector(state => state.user.me?.id)
+    const id = useSelector((state) => state.user.me?.id)
     // const id = me?.id;  //옵셔널 체이닝
 
     return (

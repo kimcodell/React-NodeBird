@@ -13,7 +13,7 @@ const useInput = (initialValue = null) => {
     const handler = useCallback((e) => {
         setValue(e.target.value)
     }, []);
-    return [value, handler];
+    return [value, handler, setValue];  //세번째 인자로 setState도 제공.
 }
 
 export default useInput;
