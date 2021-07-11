@@ -4,12 +4,12 @@ import propTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
 
 import useInput from "../hooks/useInput";
-import { ADD_COMMENT_REQUEST } from "../reducers/post";
+import { addComment, ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
     const dispatch = useDispatch();
     const id = useSelector((state) => state.user.me?.id);
-    const { addCommentDone } = useSelector((state) => state.post);
+    const { addCommentDone, addCommentLoading } = useSelector((state) => state.post);
     const [commentText, onChangeCommentText, setCommentText] = useInput('');
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const CommentForm = ({ post }) => {
         <Form onFinish={onSubmitComment}>
             <Form.Item style={{ position: 'relative', margin: 0 }}>
                 <Input.TextArea value={commentText} onChange={onChangeCommentText} row={4} />
-                <Button style={{ position:'absolute', right: 0, bottom: -40 }} type="primary" htmlType="submit">작성</Button>
+                <Button style={{ position:'absolute', right: 0, bottom: -40, zIndex: 1 }} type="primary" htmlType="submit" loading={addCommentLoading}>작성</Button>
             </Form.Item>
         </Form>
     );

@@ -26,8 +26,8 @@
         "react/jsx-indent": [4, "tab"],
         "max-len": "off",   //줄 최대 길이 제한
         "spaced-comment": "off",    //주석 제한
-        "quotes": "off",    //문자열은 ''만 쓸 수 있게 하는 거
-        "no-trailing-spaces": "off",    //공백 없도록 하는 거
+        // "quotes": "off",    //문자열은 ''만 쓸 수 있게 하는 거
+        // "no-trailing-spaces": "off",    //공백 없도록 하는 거
         "jsx-ally/label-has-associated-control": "off",
         "jsx-ally/anchor-is-valid": "off",
         "no-console": "off",

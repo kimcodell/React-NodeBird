@@ -1,25 +1,37 @@
 import React, { useCallback, useState } from "react";
 import propTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, Button, Popover, Avatar, List, Comment } from "antd";
 import { EllipsisOutlined, MessageOutlined, HeartOutlined, HeartTwoTone, RetweetOutlined } from "@ant-design/icons";
 
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent'
+import { REMOVE_POST_REQUEST } from "../reducers/post";
 
 const PostCard = ({ post }) => {
+    const dispatch = useDispatch();
     const [liked , setLiked] = useState(false);
     const [commentFormOpened , setCommentFormOpened] = useState(false);
+    
     const onToggleLike = useCallback(() => {
         setLiked((prev) => !prev);
     }, []);
+
     const onToggleComment = useCallback(() => {
         setCommentFormOpened((prev) => !prev)
     }, []);
 
-    const id = useSelector((state) => state.user.me?.id)
+    const onRemovePost = useCallback(() => {
+        dispatch({
+            type: REMOVE_POST_REQUEST,
+            data: post.id,
+        })
+    }, []);
+
+    const id = useSelector((state) => state.user.me?.id);
     // const id = me?.id;  //옵셔널 체이닝
+    const { removePostLoading } = useSelector((state) => state.post);
 
     return (
         <div style={{marginBottom: 20}}>
@@ -33,8 +45,8 @@ const PostCard = ({ post }) => {
                         <Button.Group>
                             {(id && post.User.id === id) ? (
                                 <>
-                                    <Button type="primary">수정</Button>
-                                    <Button type="danger">삭제</Button>
+                                    <Button >수정</Button>
+                                    <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>삭제</Button>
                                 </>
                             ) : <Button>신고</Button>}
                         </Button.Group>
@@ -53,7 +65,7 @@ const PostCard = ({ post }) => {
                 <div>
                     <CommentForm post={post} />
                     <List
-                        header={`${post.Comments.length}개의 댓글`}
+                        header={`${post.Comments ? post.Comments.length : 0}개의 댓글`}
                         itemLayout="horizontal"
                         dataSource={post.Comments}
                         renderItem={item => (           //post.Comments 안의 요소 각각이 item으로 들어감. 꼭 {}가 아니라 ()로 해줘야 함. 왜지...?
