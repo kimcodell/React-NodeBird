@@ -15,7 +15,7 @@ import userSaga from './user';
 //     yield throttle('ADD_POST_REQUEST', addPost, 3000);  //takeEvery는 여러번 클릭하면 클릭한 수만큼 실행됨. takeLatest는 동시에 여러번 클릭해도 가장 마지막 것만 인식(실행). 이미 완료된 걸 취소하진 않음.
 // }                                                       //but, takeLatest는 응답만 취소하는 거지 요청까지 취소하진 않음. 즉, 백엔드 서버에는 데이터가 2번 들어갈 수 있음.
 //                                                         //takeLeading은 여러번 클릭해도 가장 첫번째 것만 인식(실행).
-//                                                         //따라서 throttle을 쓰면 한번 요청하면 지정한 시간 동안은 요청X.
+//                                                         //따라서 throttle을 쓰면 한번 요청하면 지정한 시간 동안은 요청X. 단, 요청을 취소하진 않으므로 지정한 시간이 지나면 요청을 보냄. 
 //                                                         //보통은 takeLatest를 씀. 
 
 //reducer는 쪼개면 combine을 해야했지만 saga는 combine 안해도 됨.
